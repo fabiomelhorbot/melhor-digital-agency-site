@@ -83,60 +83,50 @@
 /*
  * ── HERO FIXES (desktop ≥ 900 px) ────────────────────────────────────────
  *
- * Estratégia:
- *   1. No desktop, o h1 usa font-size em "vw" para escalar junto com a tela.
- *      O valor 2.05vw garante que cada linha caiba em ~55% da tela sem cortar.
- *   2. <br class="d-br"> aparece apenas no desktop → força a quebra no lugar certo.
- *   3. SEM white-space:nowrap / overflow:hidden / text-overflow:ellipsis
- *      (esses causavam o "..." que cortou o texto).
- *   4. Botões centralizados no desktop.
- *   5. Logo original mantida — nada foi alterado no header.
+ * O site usa grid-template-columns: 1.15fr 0.85fr com gap:48px e padding:24px.
+ * A coluna de texto (.hero-content) mede ~680px em 1280px de viewport.
+ * O font-size original é clamp(1.9rem, 3.2vw, 2.6rem) ≈ 41px → 4 linhas.
+ *
+ * Para caber em 2 linhas dentro de ~680px, precisa de ≈ 22px.
+ * Usando 1.7vw: 1280px→21.8px (52 chars/linha ✓), 1440px→24.5px (52 chars ✓).
+ *
+ * NÃO mexemos no width do .hero-content: em CSS Grid, width no item
+ * não altera o tamanho da coluna — o tamanho vem do grid-template do pai.
  */
 
-/* Quebra visível só no desktop */
+/* Quebra de linha — visível só no desktop */
 br.d-br { display: none; }
 
 @media (min-width: 900px) {
 
   br.d-br { display: block; }
 
-  /* Alarga a coluna de texto para ~55% — sem !important,
-     usa especificidade alta para sobrepor o styles.css */
-  .hero .hero-content {
-    max-width: 55% !important;
-    width: 55% !important;
-    flex-shrink: 0 !important;
-  }
-
   /*
-   * 2.05 vw faz "Artificial para Empresas que Querem Vender Mais"
-   * (linha mais longa, ~47 chars) caber em 55% da tela a partir de 1 024 px.
+   * font-size: 1.7vw garante que a linha mais longa do h1
+   * ("Artificial para Empresas que Querem Vender Mais", 48 chars)
+   * caiba em 1 linha na coluna real do grid (~57.5% da viewport menos gaps).
    *
-   * Exemplos:
-   *   1 024 px → font ≈ 21 px, coluna ≈ 563 px  → linha ≈ 543 px  ✓
-   *   1 280 px → font ≈ 26 px, coluna ≈ 704 px  → linha ≈ 677 px  ✓
-   *   1 440 px → font ≈ 30 px, coluna ≈ 792 px  → linha ≈ 762 px  ✓
-   *   1 920 px → font ≈ 39 px, coluna ≈ 1056 px → linha ≈ 1016 px ✓
+   * Viewport 900px  → col ≈ 462px, font ≈ 15.3px → 50 chars/linha ✓
+   * Viewport 1280px → col ≈ 681px, font ≈ 21.8px → 52 chars/linha ✓
+   * Viewport 1440px → col ≈ 773px, font ≈ 24.5px → 53 chars/linha ✓
+   * Viewport 1920px → col ≈ 1049px, font ≈ 32.6px → 54 chars/linha ✓
    */
   .hero h1 {
-    font-size: 2.05vw !important;
-    line-height: 1.25 !important;
+    font-size: 1.7vw !important;
+    line-height: 1.3 !important;
     letter-spacing: -0.01em;
   }
 
-  /* Subtítulo: escala junto, 2 linhas */
+  /* Subtítulo: usa o clamp original do styles.css (já é 2 linhas)
+     mas removemos o max-width:480px que limitava o container */
   .hero .hero-subtitle {
-    font-size: 1.05vw !important;
-    line-height: 1.7 !important;
     max-width: 100% !important;
+    line-height: 1.75 !important;
   }
 
-  /* Botões centralizados */
+  /* Botões: alinhados ao centro da coluna */
   .hero .hero-actions {
-    display: flex !important;
     justify-content: center !important;
-    flex-wrap: wrap !important;
-    gap: 1rem !important;
   }
 }
 </style>
