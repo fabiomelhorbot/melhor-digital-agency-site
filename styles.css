@@ -492,6 +492,36 @@ h3 { font-size: 1.2rem; }
 }
 .whatsapp-fab:hover { transform: scale(1.08); }
 
+/* ---------- Offer layout (plan card + highlight) ---------- */
+.offer-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 32px;
+  align-items: stretch;
+}
+.offer-highlight {
+  background: var(--c-navy);
+  border-radius: 20px;
+  padding: 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 30px 60px -30px rgba(10,17,40,0.5);
+}
+.offer-highlight h2 {
+  color: #fff;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  margin-bottom: 0.6em;
+}
+.offer-highlight p {
+  color: #B7C2DB;
+  font-size: 1.05rem;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .offer-grid { grid-template-columns: 1fr; }
+}
+
 /* ---------- Reveal-on-scroll ---------- */
 [data-reveal] {
   opacity: 0;
