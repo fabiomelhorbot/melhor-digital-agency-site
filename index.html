@@ -81,76 +81,73 @@
 
 <style>
 /*
- * ─────────────────────────────────────────────────────────
- *  HERO FIXES — desktop only (≥ 900px)
+ * ── HERO FIXES (desktop ≥ 900 px) ────────────────────────────────────────
  *
- *  Problema: a coluna de texto do hero ocupa ~35% da tela,
- *  por isso o h1 quebra em 5 linhas. A solução é ampliar
- *  essa coluna para ~60% e ajustar o font-size com vw,
- *  assim cada trecho do h1 cabe em exatamente 1 linha.
- * ─────────────────────────────────────────────────────────
+ * Estratégia:
+ *   1. No desktop, o h1 usa font-size em "vw" para escalar junto com a tela.
+ *      O valor 2.05vw garante que cada linha caiba em ~55% da tela sem cortar.
+ *   2. <br class="d-br"> aparece apenas no desktop → força a quebra no lugar certo.
+ *   3. SEM white-space:nowrap / overflow:hidden / text-overflow:ellipsis
+ *      (esses causavam o "..." que cortou o texto).
+ *   4. Botões centralizados no desktop.
+ *   5. Logo original mantida — nada foi alterado no header.
  */
 
-/* Mobile: comportamento normal, sem quebras forçadas */
-.hero-line { display: inline; }
+/* Quebra visível só no desktop */
+br.d-br { display: none; }
 
 @media (min-width: 900px) {
 
-  /* Cada <span class="hero-line"> vira um bloco = 1 linha */
-  .hero-line {
-    display: block;
-    white-space: nowrap;       /* impede quebra interna */
-    overflow: hidden;
-    text-overflow: ellipsis;   /* segurança contra overflow extremo */
-  }
+  br.d-br { display: block; }
 
-  /* Alarga a coluna de texto para o texto caber em 2 linhas */
-  .hero-content {
-    max-width: 62% !important;
-    width: 62% !important;
+  /* Alarga a coluna de texto para ~55% — sem !important,
+     usa especificidade alta para sobrepor o styles.css */
+  .hero .hero-content {
+    max-width: 55% !important;
+    width: 55% !important;
+    flex-shrink: 0 !important;
   }
 
   /*
-   * font-size em vw: escala junto com a largura da tela.
-   * 2.05vw faz ambas as linhas do h1 caberem em 1280px+.
-   * clamp(mínimo, preferido, máximo)
+   * 2.05 vw faz "Artificial para Empresas que Querem Vender Mais"
+   * (linha mais longa, ~47 chars) caber em 55% da tela a partir de 1 024 px.
+   *
+   * Exemplos:
+   *   1 024 px → font ≈ 21 px, coluna ≈ 563 px  → linha ≈ 543 px  ✓
+   *   1 280 px → font ≈ 26 px, coluna ≈ 704 px  → linha ≈ 677 px  ✓
+   *   1 440 px → font ≈ 30 px, coluna ≈ 792 px  → linha ≈ 762 px  ✓
+   *   1 920 px → font ≈ 39 px, coluna ≈ 1056 px → linha ≈ 1016 px ✓
    */
   .hero h1 {
-    font-size: clamp(1.45rem, 2.05vw, 3rem) !important;
-    line-height: 1.22 !important;
+    font-size: 2.05vw !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.01em;
   }
 
-  /* Subtítulo: 2 linhas — cada <span class="sub-line"> = 1 linha */
-  .sub-line {
-    display: block;
-  }
-
+  /* Subtítulo: escala junto, 2 linhas */
   .hero .hero-subtitle {
-    font-size: clamp(0.9rem, 1.1vw, 1.1rem) !important;
-    line-height: 1.65 !important;
+    font-size: 1.05vw !important;
+    line-height: 1.7 !important;
     max-width: 100% !important;
   }
 
   /* Botões centralizados */
-  .hero-actions {
+  .hero .hero-actions {
     display: flex !important;
     justify-content: center !important;
     flex-wrap: wrap !important;
     gap: 1rem !important;
   }
 }
-
-/* Em mobile: sub-line também inline para fluxo normal */
-.sub-line { display: inline; }
 </style>
 </head>
 <body>
 
 <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
 
-<!-- LOGO ORIGINAL mantida exatamente como estava -->
 <header class="site-header" id="topo">
   <div class="header-inner">
+    <!-- LOGO ORIGINAL — sem alteração -->
     <a href="/" class="brand" aria-label="Melhor Digital Agency — página inicial">
       <img src="https://midia.melhordigitalagency.com.br/images/logosite.png" width="180" height="82" alt="Melhor Digital Agency" class="brand-logo">
     </a>
@@ -186,22 +183,18 @@
       <p class="eyebrow">Marketing digital · Inteligência artificial · Automação</p>
 
       <!--
-        H1: No desktop cada <span class="hero-line"> ocupa exatamente 1 linha.
-            No mobile os spans são inline e o texto flui normalmente.
+        H1 com quebra controlada:
+        • <br class="d-br"> só aparece no desktop (display:block via CSS acima).
+        • No mobile: o <br> some e o texto flui normalmente em quantas linhas precisar.
+        • O font-size em vw garante que cada metade caiba em 1 linha sem cortar.
       -->
-      <h1>
-        <span class="hero-line">Agência de Marketing Digital e Inteligência</span>
-        <span class="hero-line">Artificial para Empresas que Querem Vender Mais</span>
-      </h1>
+      <h1>Agência de Marketing Digital e Inteligência<br class="d-br"> Artificial para Empresas que Querem Vender Mais</h1>
 
       <!--
-        Subtítulo: dividido em 2 partes de tamanho similar.
-        No desktop cada parte fica em 1 linha. No mobile flui normal.
+        Subtítulo com a mesma técnica.
+        A quebra está posicionada no meio do texto para equilibrar as 2 linhas.
       -->
-      <h2 class="hero-subtitle">
-        <span class="sub-line">Posicionamos sua marca com estratégias de marketing digital, tráfego pago e IA</span>
-        <span class="sub-line">para atrair clientes qualificados, fidelizar seu público e aumentar suas vendas.</span>
-      </h2>
+      <h2 class="hero-subtitle">Posicionamos sua marca com estratégias de marketing digital, tráfego pago e automação com IA<br class="d-br"> para atrair clientes qualificados, fidelizar seu público e aumentar suas vendas de forma estratégica.</h2>
 
       <div class="hero-actions">
         <a href="#oferta" class="btn btn-primary">Quero Atrair Mais Clientes</a>
