@@ -138,6 +138,18 @@ br.d-br { display: none; }
     justify-content: center !important;
   }
 }
+
+/* ── PIPELINE MOBILE FIX ────────────────────────────────────────────────────
+ * O inline style="grid-template-columns:repeat(5,1fr)" força 5 colunas em
+ * qualquer largura, causando scroll horizontal no celular.
+ * Com !important no @media abaixo, sobrescrevemos o inline style no mobile.
+ */
+@media (max-width: 899px) {
+  .pipeline {
+    grid-template-columns: 1fr !important;
+    overflow-x: visible !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -244,11 +256,11 @@ br.d-br { display: none; }
         </article>
         <article class="card" data-reveal>
           <h3>Mais contatos</h3>
-          <p>Mais mensagens chegando no seu WhatsApp.</p>
+          <p>Mais mensagens chegando no seu WhatsApp, gerando mais oportunidades de negócio para seu time comercial.</p>
         </article>
         <article class="card" data-reveal>
-          <h3>Mais oportunidades</h3>
-          <p>Mais oportunidades de negócio para o seu time comercial.</p>
+          <h3>Fidelize seu cliente</h3>
+          <p>Traçamos a estratégia perfeita para que você não venda apenas uma vez, mas fidelize seus clientes para que continuem comprando com você.</p>
         </article>
         <article class="card" data-reveal>
           <h3>Mais clientes</h3>
@@ -277,7 +289,7 @@ br.d-br { display: none; }
         <li class="pipeline-step">
           <div class="pipeline-node"><span class="pipeline-mark">1</span></div>
           <h3>Você entra em contato</h3>
-          <p>Conta um pouco sobre sua empresa pelo WhatsApp ou pelo formulário.</p>
+          <p>Entramos em contato com você por uma ligação e você nos conta sobre sua empresa e seu nicho, para que possamos definir seu público-alvo.</p>
         </li>
         <li class="pipeline-step">
           <div class="pipeline-node"><span class="pipeline-mark">2</span></div>
@@ -287,17 +299,17 @@ br.d-br { display: none; }
         <li class="pipeline-step">
           <div class="pipeline-node"><span class="pipeline-mark">3</span></div>
           <h3>Criamos a estratégia</h3>
-          <p>Criativos, textos, configuração da campanha e uma automação simples de resposta imediata no WhatsApp, prontos para rodar.</p>
+          <p>Criativos, textos, imagem e vídeo. Configuramos uma campanha simples e estratégica para que as pessoas cliquem no botão e falem com você pelo WhatsApp da sua empresa.</p>
         </li>
         <li class="pipeline-step">
           <div class="pipeline-node"><span class="pipeline-mark">4</span></div>
-          <h3>Você aparece para milhares</h3>
-          <p>As campanhas entram no ar e geram alcance real.</p>
+          <h3>Você aparece para várias pessoas na sua região</h3>
+          <p>Campanhas direcionadas a pessoas da sua região para que entrem em contato com você, interessadas no seu produto ou serviço.</p>
         </li>
         <li class="pipeline-step">
           <div class="pipeline-node"><span class="pipeline-mark">5</span></div>
           <h3>Você recebe novos contatos</h3>
-          <p>Mensagens chegam no WhatsApp, prontas para virar vendas.</p>
+          <p>Através das campanhas, você recebe mensagens no WhatsApp, prontas para virar vendas.</p>
         </li>
       </ol>
     </div>
@@ -314,22 +326,15 @@ br.d-br { display: none; }
         <article class="card" data-reveal>
           <h3>Tráfego Pago</h3>
           <p>Colocamos sua empresa na frente das pessoas certas para gerar mais contatos e aumentar suas vendas.</p>
-          <p class="plan-note" style="margin-top:.6em;margin-bottom:0;">Campanhas em Facebook Ads e Instagram Ads, otimizadas continuamente.</p>
+          <p class="plan-note" style="margin-top:.6em;margin-bottom:0;">Campanha em Facebook e Instagram ADS, melhorando suas vendas e posicionando sua marca no mercado.</p>
         </article>
         <article class="card" data-reveal>
-          <h3>Sites Profissionais</h3>
-          <p>Criamos sites rápidos, modernos e preparados para transformar visitantes em clientes.</p>
-          <p class="plan-note" style="margin-top:.6em;margin-bottom:0;">Desenvolvimento de sites e landing pages responsivas, otimizadas para SEO.</p>
+          <h3>Criativo com Imagem e Vídeo</h3>
+          <p>Criamos uma estratégia perfeita baseada no que já está dando certo no mercado, adaptando para o seu negócio, mostrando uma imagem ou vídeo de valor que atraia muitos clientes.</p>
         </article>
         <article class="card" data-reveal>
           <h3>Inteligência Artificial</h3>
-          <p>Automatize seu atendimento 24 horas por dia e nunca mais perca clientes por demora nas respostas.</p>
-          <p class="plan-note" style="margin-top:.6em;margin-bottom:0;">Agente de IA integrado ao WhatsApp, qualificando leads automaticamente.</p>
-        </article>
-        <article class="card" data-reveal>
-          <h3>Automação</h3>
-          <p>Reduza tarefas repetitivas, economize tempo e aumente a produtividade do seu negócio.</p>
-          <p class="plan-note" style="margin-top:.6em;margin-bottom:0;">Integrações entre seus canais de atendimento e vendas.</p>
+          <p>Criamos um atendente com inteligência artificial que estará atendendo todos os clientes que entram em contato imediatamente, esclarecendo as primeiras dúvidas e trazendo o relatório completo para que você ou seu vendedor possa fechar a venda.</p>
         </article>
       </div>
     </div>
@@ -345,35 +350,19 @@ br.d-br { display: none; }
       <div class="diff-grid">
         <article class="diff-item" data-reveal>
           <h3>Atendimento personalizado</h3>
-          <p>Cada estratégia parte do seu negócio, não de um modelo pronto.</p>
+          <p>Você fala diretamente com quem cuida da sua operação. Nada de intermediários, nada de suporte genérico — sua empresa recebe atenção de quem entende do seu mercado.</p>
         </article>
         <article class="diff-item" data-reveal>
           <h3>Estratégias sob medida</h3>
-          <p>Campanhas pensadas para o seu público e o seu momento.</p>
+          <p>Cada campanha é construída do zero para o seu negócio, seu público e seu momento. Nenhum modelo pronto, nenhuma solução genérica.</p>
         </article>
         <article class="diff-item" data-reveal>
           <h3>Inteligência Artificial</h3>
-          <p>Tecnologia a serviço do seu atendimento e das suas vendas.</p>
-        </article>
-        <article class="diff-item" data-reveal>
-          <h3>Automações</h3>
-          <p>Menos trabalho manual, mais foco no que importa.</p>
-        </article>
-        <article class="diff-item" data-reveal>
-          <h3>Sites profissionais</h3>
-          <p>Presença digital que transmite confiança desde o primeiro clique.</p>
-        </article>
-        <article class="diff-item" data-reveal>
-          <h3>Marketing Digital</h3>
-          <p>Decisões orientadas por dados, com ajustes constantes.</p>
-        </article>
-        <article class="diff-item" data-reveal>
-          <h3>Atendimento rápido</h3>
-          <p>Fale direto com quem está tocando a sua operação.</p>
+          <p>Enquanto você dorme, um atendente de IA responde, qualifica e direciona cada cliente que chega pelo WhatsApp — sem perder nenhuma oportunidade de venda.</p>
         </article>
         <article class="diff-item" data-reveal>
           <h3>Foco em resultados</h3>
-          <p>Cada peça do sistema existe para trazer clientes reais.</p>
+          <p>Não trabalhamos com métricas de vaidade. Cada decisão, cada ajuste e cada campanha existe com um único objetivo: trazer clientes reais e vendas para o seu negócio.</p>
         </article>
       </div>
     </div>
@@ -384,7 +373,7 @@ br.d-br { display: none; }
     <div class="section-inner section-inner-narrow">
       <p class="eyebrow">Vamos conversar</p>
       <h2 id="titulo-contato">Solicite seu diagnóstico estratégico</h2>
-      <p class="section-lede">Conte um pouco sobre sua empresa. Nosso time analisa o cenário e retorna com os próximos passos.</p>
+      <p class="section-lede">Preencha seus dados para que nosso time comercial entre em contato com você e prossiga para o próximo passo.</p>
 
       <form class="contact-form" id="form-contato" action="https://formspree.io/f/mnjkkwjp" method="POST">
         <input type="hidden" name="_subject" value="Novo diagnóstico estratégico — Melhor Digital Agency">
