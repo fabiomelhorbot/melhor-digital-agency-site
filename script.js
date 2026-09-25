@@ -82,3 +82,29 @@
       });
   });
 })();
+
+// Hero: vídeo do celular só no desktop, sincronizado com o vídeo de fundo
+(function () {
+  var phone = document.querySelector('.phone-video');
+  var bg = document.querySelector('.hero-video');
+  if (!phone || !bg) return;
+  var mq = window.matchMedia('(min-width: 901px)');
+
+  function load() {
+    if (mq.matches && !phone.getAttribute('src')) {
+      phone.src = phone.getAttribute('data-src');
+      phone.play().catch(function () {});
+    }
+  }
+  function sync() {
+    if (mq.matches && phone.readyState > 1 && bg.readyState > 1 &&
+        Math.abs(phone.currentTime - bg.currentTime) > 0.25) {
+      phone.currentTime = bg.currentTime;
+    }
+  }
+
+  load();
+  if (mq.addEventListener) mq.addEventListener('change', load);
+  phone.addEventListener('loadeddata', sync);
+  setInterval(sync, 4000);
+})();
